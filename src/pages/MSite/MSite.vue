@@ -78,6 +78,7 @@
       // 小数组中的元素最大是8
       categorysArr() {
         const {categorys} = this  
+        console.log(this)
         // 1.准备空的二维数组
         const arr = []
         // 准备一个小数组(最大长度是8)
