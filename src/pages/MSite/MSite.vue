@@ -3,17 +3,24 @@
     <!--首页头部-->
     <header-top :title="address.name">
       <!-- solt左边插槽 -->
-      <span class="header_search" slot="left">
+      <router-link class="header_search" slot="left" tag="span" to="/seacrh">
         <i class="iconfont icon-sousuo"></i>
-      </span>
+      </router-link>
       <!-- solt右边插槽 -->
-       <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
+       <router-link class="header_login" slot="right" tag="span" :to="userInfo._id ? '/userInfo' : '/login' " >
+        <span class="header_login_text" v-if="!userInfo._id">
+          登录|注册
+        </span>
+        <span class="header_login_text" v-else>
+          <i class="iconfont icon-person"></i>
+        </span>
+
+
+      </router-link>
     </header-top>
     <!--首页导航-->
-    <nav class="msite_nav">
-      <div class="swiper-container">
+    <nav class="msite_nav" >
+      <div class="swiper-container" v-if="categorys.length > 0">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(categorys,index) in categorysArr" :key="index">
             <a href="javascript:" class="link_to_food" v-for="(category,index1) in categorys" :key="index1">
@@ -27,6 +34,9 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
       </div>
+      <img src="./images/msite_back.svg" alt="back" v-else>
+
+
     </nav>
     <!--首页附近商家-->
     <div class="msite_shop_list">
@@ -57,6 +67,7 @@
     },
     mounted(){
       this.$store.dispatch('getCategorys')
+      this.$store.dispatch('getShop')
     },
     watch:{
       categorys(value){// categorys数组中有数据了, 在异步更新界面之前执行
@@ -73,8 +84,8 @@
       }
     },
     computed: {
-      ...mapState(['address','categorys']),
-      // 根据categorys生成一个二维数组
+      ...mapState(['address','categorys','userInfo']),
+      // 根据categorys生成一个二维数组 轮播图遍历=>伦布图里面的a标签遍历
       // 小数组中的元素最大是8
       categorysArr() {
         const {categorys} = this  

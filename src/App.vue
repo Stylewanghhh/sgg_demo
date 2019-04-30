@@ -17,6 +17,7 @@ import footerGuide from './components/FooterGuide/FootGuide'
         },
         mounted(){
           this.$store.dispatch('getAddress')
+          this.$store.dispatch('getUserInfo')
         },
     }
 </script>
