@@ -3,16 +3,21 @@
     <shop-header></shop-header>
     <div class="tab">
       <div class="tab-item">
-        <router-link to="/shop/goods">点餐</router-link>
+        //shop-header跳转方式是$router.back(),这种是push跳转方式，添加replace变成repalce方式
+        //如果不加replace只会返回一次而不是直接返回到上一页
+        <router-link to="/shop/goods" replace>点餐</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="/shop/ratings">评论</router-link>
+        <router-link to="/shop/ratings" replace>评论</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="/shop/info">商家</router-link>
+        <router-link to="/shop/info" replace>商家</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    //缓存路由组件对象
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

@@ -1,9 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MSite from '../pages/MSite/MSite.vue'
-import Order from '../pages/Order/Order.vue'
-import Profile from '../pages/Profile/Profile.vue'
-import Search from '../pages/Search/Search.vue'
+
+// import MSite from '../pages/MSite/MSite.vue'
+// import Order from '../pages/Order/Order.vue'
+// import Profile from '../pages/Profile/Profile.vue'
+// import Search from '../pages/Search/Search.vue'
+//路由懒加载
+const MSite = () => import('../pages/MSite/MSite.vue')
+const Search = () => import('../pages/Search/Search.vue')
+const Order = () => import('../pages/Order/Order.vue')
+const Profile = () => import('../pages/Profile/Profile.vue')
+
 import Login from '../pages/Login/Login.vue'
 import Shop from '../pages/Shop/Shop.vue'
 
@@ -23,7 +30,6 @@ export default new VueRouter({
         {path:'/login',name:'Login',component:Login},
         {
           path:'/shop',
-          name:'Shop',
           component:Shop,
           children:[
             {path:'/shop/goods',name:'shopgoods',component:shopGoods},
